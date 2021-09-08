@@ -1,8 +1,8 @@
+// Topological Sorting (Normal) in C++ code with love and passion by H.T.Nguyên
 #include <iostream>
 
 using namespace std;
 
-// deg = Save the quantity supplied
 void topologicalSorting(int** graph, int n) {
 	int* deg = new int[n] {0};
 	int* flag = new int[n] {0};

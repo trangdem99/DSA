@@ -1,3 +1,4 @@
+// dijkstra's algorithm in C++ code with love and passion by H.T.Nguyên
 #include <iostream>
 
 #define INFINITY 999999
