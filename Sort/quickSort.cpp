@@ -5,10 +5,10 @@ using namespace std;
 
 // print data
 void printData(int* data, int size) {
-  for (int i = 0; i < size; ++i) {
-    cout << "  " << data[i];
-  }
-  cout << endl;
+	for (int i = 0; i < size; ++i) {
+		cout << "  " << data[i];
+	}
+	cout << endl;
 }
 
 void swap(int& a, int& b){
@@ -20,61 +20,41 @@ void swap(int& a, int& b){
 int partition(int* data, int low, int high) {
   
 	// select the rightmost element as pivot
-  int pivot = data[high];
+	int pivot = data[high];
 
-  // pointer for greater element
+	// pointer for greater element
 	int i = low - 1;
 
-  // traverse each element of the array and compare them with the pivot
+	// traverse each element of the array and compare them with the pivot
 	for (int j = low; j < high; j++)
 		if (data[j] < pivot) {
 
-      // if element smaller than pivot is found then swap it with the greater element pointed by i
+			// if element smaller than pivot is found then swap it with the greater element pointed by i
 			i++;
 
-      // swap element at i with element at j
+			// swap element at i with element at j
 			swap(data[i], data[j]);
 		}
 
-  // swap pivot with the greater element at i
+	// swap pivot with the greater element at i
 	swap(data[i + 1], data[high]);
 
-  // return the partition point
+	// return the partition point
 	return (i + 1);
 }
 
 void quickSort(int * data, int low, int high) {
 	if (low < high) {
 
-    // find the pivot element such that
-    // elements smaller than pivot are on left of pivot
-    // elements greater than pivot are on righ of pivot
+		// find the pivot element such that
+		// elements smaller than pivot are on left of pivot
+		// elements greater than pivot are on righ of pivot
 		int pi = partition(data, low, high);
 
-    // recursive call on the left of pivot
+		// recursive call on the left of pivot
 		quickSort(data, low, pi - 1);
 
-    // recursive call on the right of pivot
+		// recursive call on the right of pivot
 		quickSort(data, pi + 1, high);
 	}
-}
-
-int main() {
-  int size;
-  cout << "Input size: "; cin >> size;
-
-  int *data = new int[size];
-  
-  for (int i = 0; i < size; i++){
-    cout << "Input element number " << i + 1 << " : ";
-    cin >> data[i];
-  }
-
-  quickSort(data, 0, size - 1);
-
-  cout << "Sorted Array in Ascending Order:" << endl;
-
-  printData(data, size);
-
-  return 0;
 }

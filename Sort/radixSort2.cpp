@@ -6,10 +6,10 @@ using namespace std;
 
 // print data
 void printData(string* data, int size) {
-  for (int i = 0; i < size; ++i) {
-    cout << "  " << data[i];
-  }
-  cout << endl;
+	for (int i = 0; i < size; ++i) {
+		cout << "  " << data[i];
+	}
+	cout << endl;
 }
 
 // Function to change alphabet to number (ASCII)
@@ -72,24 +72,4 @@ void radixSort(string* name, int n) {
     // Apply counting sort to sort elements based on place value.
 	for (int i = max - 1; i >= 0; i--)
 		countSort(name, n, i);
-}
-
-int main() {
-  int size;
-  cout << "Input size: "; cin >> size;
-
-  string *data = new string[size];
-  
-  for (int i = 0; i < size; i++){
-    cout << "Input element number " << i + 1 << " : ";
-    getline(cin >> ws, data[i]);
-  }
-
-  radixSort(data, size);
-
-  cout << "Sorted Array in Ascending Order:" << endl;
-
-  printData(data, size);
-
-  return 0;
 }

@@ -5,10 +5,10 @@ using namespace std;
 
 // print data
 void printData(int* data, int size) {
-  for (int i = 0; i < size; ++i) {
-    cout << "  " << data[i];
-  }
-  cout << endl;
+	for (int i = 0; i < size; ++i) {
+		cout << "  " << data[i];
+	}
+	cout << endl;
 }
 
 void merge(int* data, int first, int mid, int last) {
@@ -61,24 +61,4 @@ void mergeSort(int* data, int first, int last) {
 
     // Merge the sorted subarrays
 	merge(data, first, mid, last);
-}
-
-int main() {
-  int size;
-  cout << "Input size: "; cin >> size;
-
-  int *data = new int[size];
-  
-  for (int i = 0; i < size; i++){
-    cout << "Input element number " << i + 1 << " : ";
-    cin >> data[i];
-  }
-
-  mergeSort(data, 0, size - 1);
-
-  cout << "Sorted Array in Ascending Order:" << endl;
-
-  printData(data, size);
-
-  return 0;
 }

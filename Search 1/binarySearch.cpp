@@ -1,3 +1,4 @@
+// Binaray Search in C++ code with love and passion by H.T.Nguyên
 #include <iostream>
 
 using namespace std;
@@ -18,29 +19,4 @@ int binarySearch(int* data, int key, int left, int right) {
 	}
 
 	return -1;
-}
-
-int main() {
-	int size;
-	cout << "Input size: "; cin >> size;
-
-	int* data = new int[size];
-
-	for (int i = 0; i < size; i++) {
-		cout << "Input element number " << i + 1 << " : ";
-		cin >> data[i];
-	}
-
-	int key;
-	cout << "Input the key you want to find: " << endl;
-	cin >> key;
-
-	int k = binarySearch(data, key, 0, size - 1);
-
-	if (k == -1)
-		cout << "Cannot found your key in the array" << endl;
-	else
-		cout << "Found your key at " << k << " in the array" << endl;
-
-	return 0;
 }
