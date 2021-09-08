@@ -27,6 +27,7 @@ void Dijkstra(int** graph, int n, int start) {
 		visited[i] = 0;
 	}
 
+	// Distance of self loop is zero
 	distance[start] = 0;
 	visited[start] = 1;
 	count = 1;
@@ -34,6 +35,7 @@ void Dijkstra(int** graph, int n, int start) {
 	while (count < n - 1) {
 		mindistance = INFINITY;
 
+		// Update the distance between neighbouring vertex and source vertex
 		for (int i = 0; i < n; i++)
 			if (distance[i] < mindistance && !visited[i]) {
 				mindistance = distance[i];
@@ -42,6 +44,7 @@ void Dijkstra(int** graph, int n, int start) {
 
 		visited[nextnode] = 1;
 
+		// Update all the neighbouring vertex distances
 		for (int i = 0; i < n; i++)
 			if (!visited[i])
 				if (mindistance + cost[nextnode][i] < distance[i]) {
