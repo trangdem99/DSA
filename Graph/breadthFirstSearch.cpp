@@ -1,6 +1,5 @@
-// Depth First Search in C++ code with love and passion by H.T.Nguyên
 #include <iostream>
-#include <string>
+#include <queue>
 
 using namespace std;
 
@@ -25,8 +24,8 @@ Node* createNode(int vertex) {
 Graph* createGraph(int vertices) {
 	Graph* temp = new Graph;
 	temp->numVertices = vertices;
-	temp->adjList = new Node* [vertices];
-	temp->visited = new int [vertices];
+	temp->adjList = new Node * [vertices];
+	temp->visited = new int[vertices];
 
 	for (int i = 0; i < vertices; i++) {
 		temp->adjList[i] = nullptr;
@@ -45,21 +44,28 @@ void addEdge(Graph* graph, int src, int des) {
 	graph->adjList[des] = temp;
 }
 
-void DFS(Graph* graph, int vertex) {
-	Node* adjList = graph->adjList[vertex];
-	Node* temp = adjList;
+void BFS(Graph* graph, int startVertex) {
+	queue<int> q;
 
-	graph->visited[vertex] = 1;
-	cout << "Visited " << vertex << endl;
+	graph->visited[startVertex] = 1;
+	q.push(startVertex);
 
-	while (temp != NULL) {
-		int connectedVertex = temp->vertex;
+	while (!q.empty()) {
+		int currentVertex = q.front();
+		cout << "Visited " << currentVertex << " ";
+		q.pop();
 
-		if (graph->visited[connectedVertex] == 0)
-			DFS(graph, connectedVertex);
-
-		temp = temp->p_Next;
+		Node* temp = graph->adjList[currentVertex];
+		
+		while (temp) {
+			int adjVertex = temp->vertex;
+			if (graph->visited[adjVertex] == 0) {
+				graph->visited[adjVertex] = 1;
+				q.push(adjVertex);
+			}
+			temp = temp->p_Next;
+		}
 	}
 }
 
-// How it work: createGraph -> addEdge -> DFS
+// How it work: createGraph -> addEdge -> BFS

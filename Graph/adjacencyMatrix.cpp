@@ -22,3 +22,5 @@ bool** createAdjMatrix(bool** adjMatrix, int numVertices) {
 
 	return adjMatrix;
 }
+
+// How it work: createAdjMatrix -> addEdge

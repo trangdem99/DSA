@@ -28,3 +28,5 @@ void selectionSort(int* data, int size) {
         data[i] = temp;
     }
 }
+
+// How it work: create dynamic array -> selectionSort

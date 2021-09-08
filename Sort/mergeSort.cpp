@@ -62,3 +62,5 @@ void mergeSort(int* data, int first, int last) {
     // Merge the sorted subarrays
 	merge(data, first, mid, last);
 }
+
+// How it work: create dynamic array -> mergeSort (first = 0, last = n - 1)

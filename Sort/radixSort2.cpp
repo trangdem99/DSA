@@ -73,3 +73,5 @@ void radixSort(string* name, int n) {
 	for (int i = max - 1; i >= 0; i--)
 		countSort(name, n, i);
 }
+
+// How it work: create dynamic array -> radixsort

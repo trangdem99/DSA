@@ -53,3 +53,5 @@ void radixsort(int* data, int size) {
     for (int place = 1; max / place > 0; place *= 10)
         countingSort(data, size, place);
 }
+
+// How it work: create dynamic array -> radixsort

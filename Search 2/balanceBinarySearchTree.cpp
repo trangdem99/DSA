@@ -4,32 +4,32 @@
 
 using namespace std;
 
-struct Data_AVL {
+struct Data {
 	string word;
 	string meaning;
 };
 
-struct Node_AVL {
-	Data_AVL key;
+struct Node {
+	Data key;
 	int height;
-	Node_AVL* p_Left;
-	Node_AVL* p_Right;
+	Node* p_Left;
+	Node* p_Right;
 };
 
 int max(int a, int b) {
 	return (a > b) ? a : b;
 }
 
-int height(Node_AVL* p) {
+int height(Node* p) {
 	return (p == NULL) ? 0 : p->height;
 }
 
-int getBalanceFactor(Node_AVL* root) {
+int getBalanceFactor(Node* root) {
 	return (root == NULL) ? 0 : (height(root->p_Left) - height(root->p_Right));
 }
 
-Node_AVL* newNode(string word, string meaning) {
-	Node_AVL* temp = new Node_AVL;
+Node* newNode(string word, string meaning) {
+	Node* temp = new Node;
 	temp->key.word = word;
 	temp->key.meaning = meaning;
 	temp->height = 1;
@@ -37,9 +37,9 @@ Node_AVL* newNode(string word, string meaning) {
 	return temp;
 }
 
-Node_AVL* leftRotate(Node_AVL* root) {
-	Node_AVL* right = root->p_Right;
-	Node_AVL* temp = right->p_Left;
+Node* leftRotate(Node* root) {
+	Node* right = root->p_Right;
+	Node* temp = right->p_Left;
 	right->p_Left = root;
 	root->p_Right = temp;
 	root->height = max(height(root->p_Left), height(root->p_Right)) + 1;
@@ -48,9 +48,9 @@ Node_AVL* leftRotate(Node_AVL* root) {
 	return right;
 }
 
-Node_AVL* rightRotate(Node_AVL* root) {
-	Node_AVL* left = root->p_Left;
-	Node_AVL* temp = left->p_Right;
+Node* rightRotate(Node* root) {
+	Node* left = root->p_Left;
+	Node* temp = left->p_Right;
 	left->p_Right = root;
 	root->p_Left = temp;
 	root->height = max(height(root->p_Left), height(root->p_Right)) + 1;
@@ -59,7 +59,7 @@ Node_AVL* rightRotate(Node_AVL* root) {
 	return left;
 }
 
-Node_AVL* insertNode(Node_AVL* root, string word, string meaning) {
+Node* insertNode(Node* root, string word, string meaning) {
 	if (root == NULL)
 		return newNode(word, meaning);
 	if (word < root->key.word)
@@ -94,37 +94,37 @@ Node_AVL* insertNode(Node_AVL* root, string word, string meaning) {
 	return root;
 }
 
-Node_AVL* findMinNode_AVL(Node_AVL* root) {
-	Node_AVL* p = root;
+Node* findMinNode(Node* root) {
+	Node* p = root;
 	while (p && p->p_Left != NULL)
 		p = p->p_Left;
 	return p;
 }
 
-Node_AVL* deleteNode_AVL(Node_AVL* root, string word) {
+Node* deleteNode(Node* root, string word) {
 	if (root == NULL)
 		return root;
 
 	if (root->key.word > word)
-		root->p_Left = deleteNode_AVL(root->p_Left, word);
+		root->p_Left = deleteNode(root->p_Left, word);
 	else if (root->key.word < word)
-		root->p_Right = deleteNode_AVL(root->p_Right, word);
+		root->p_Right = deleteNode(root->p_Right, word);
 	else {
 		if (root->p_Left == NULL) {
-			Node_AVL* temp = root->p_Right;
+			Node* temp = root->p_Right;
 			free(root);
 			return temp;
 		}
 		else if (root->p_Right == NULL) {
-			Node_AVL* temp = root->p_Left;
+			Node* temp = root->p_Left;
 			free(root);
 			return temp;
 		}
 
-		Node_AVL* p = findMinNode_AVL(root->p_Right);
+		Node* p = findMinNode(root->p_Right);
 		root->key = p->key;
 
-		root->p_Right = deleteNode_AVL(root->p_Right, p->key.word);
+		root->p_Right = deleteNode(root->p_Right, p->key.word);
 	}
 
 	if (root == NULL)
@@ -155,6 +155,8 @@ Node_AVL* deleteNode_AVL(Node_AVL* root, string word) {
 	return root;
 }
 
-bool checkEmpty_AVL(Node_AVL* root) {
+bool checkEmpty(Node* root) {
 	return (root == NULL) ? false : true;
 }
+
+// How it work: create node root -> insertNode / deleteNode

@@ -20,3 +20,5 @@ int binarySearch(int* data, int key, int left, int right) {
 
 	return -1;
 }
+
+// How it work: create dynamic array -> binarySearch (left = 0, right = n - 1)

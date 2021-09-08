@@ -25,3 +25,5 @@ void shellSort(int* data, int n) {
         }
     }
 }
+
+// How it work: create dynamic array -> shellSort

@@ -291,3 +291,5 @@ bool deleteNode(Node*& root, string word) {
 		deleteFix(root, x);
 	}
 }
+
+// How it work: create node root -> insertNode / deleteNode

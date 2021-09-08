@@ -61,3 +61,5 @@ void printData(int* data, int size) {
     }
     cout << endl;
 }
+
+// How it work: create dynamic array -> bubbleSort / optimizedBubbleSort

@@ -50,3 +50,5 @@ void heapSort(int* data, int n) {
         heapify(data, i, 0);
     }
 }
+
+// How it work: create dynamic array -> heapSort

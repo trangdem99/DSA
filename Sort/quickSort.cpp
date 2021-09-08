@@ -58,3 +58,5 @@ void quickSort(int * data, int low, int high) {
 		quickSort(data, pi + 1, high);
 	}
 }
+
+// How it work: create dynamic array -> quickSort (low = 0, high = n - 1)

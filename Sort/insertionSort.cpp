@@ -25,3 +25,5 @@ void insertionSort(int* data, int size) {
         data[j + 1] = key;
     }
 }
+
+// How it work: create dynamic array -> insertionSort

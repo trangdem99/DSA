@@ -32,11 +32,13 @@ Graph* createGraph(int vertices) {
 	return temp;
 }
 
-void addEdge(Graph* graph, int i, int j) {
-	Node* temp = createNode(j);
-	temp->p_Next = graph->adjList[i];
-	graph->adjList[i] = temp;
-	temp = createNode(i);
-	temp->p_Next = graph->adjList[j];
-	graph->adjList[j] = temp;
+void addEdge(Graph* graph, int src, int des) {
+	Node* temp = createNode(des);
+	temp->p_Next = graph->adjList[src];
+	graph->adjList[src] = temp;
+	temp = createNode(src);
+	temp->p_Next = graph->adjList[des];
+	graph->adjList[des] = temp;
 }
+
+// How it work: createGraph -> addEdge

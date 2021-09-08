@@ -10,3 +10,5 @@ int linearSearch(int * data, int key, int size) {
 			return i;
 	return -1;
 }
+
+// How it work: create dynamic array -> linearSearch

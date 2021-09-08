@@ -16,7 +16,7 @@ struct Node {
 
 #define _SIZE_ 256 // ASCII Extended number - Size is customized number
 
-Node* hashTable[_SIZE_];
+Node* hashTable[_SIZE_]{ nullptr };
 
 int hashFunc(string s) {
 	return (int)s[0];
@@ -40,11 +40,6 @@ void pushBack(Node*& p, key x) {
 	}
 }
 
-void setHashTable() {
-	for (int i = 0; i < _SIZE_; i++)
-		hashTable[i] = NULL;
-}
-
 void showListNode(Node* p) {
 	while (p != NULL) {
 		cout << "     " << p->data.word << " " << p->data.meaning << endl;
@@ -60,8 +55,4 @@ void showHashTable() {
 	}
 }
 
-// Rule push back: 
-/*
-	int k = hashFunc(l.word); // l.word ->key
-	pushBack(hashTable[k], l); 
-*/
+// How it work: hashFunc -> pushBack (key is the number returned from hashFunc)
