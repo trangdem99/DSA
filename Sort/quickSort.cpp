@@ -29,7 +29,8 @@ int partition(int* data, int low, int high) {
 	for (int j = low; j < high; j++)
 		if (data[j] < pivot) {
 
-			// if element smaller than pivot is found then swap it with the greater element pointed by i
+			// if element smaller than pivot is found then 
+			// swap it with the greater element pointed by i
 			i++;
 
 			// swap element at i with element at j
