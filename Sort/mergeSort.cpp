@@ -17,7 +17,8 @@ void merge(int* data, int first, int mid, int last) {
 	int first2 = mid + 1, last2 = last;
 	int cur = 0;
 
-    // Until we reach either end of either last1 or last2, pick larger among elements first1 and first2 and place them in the correct position
+    	// Until we reach either end of either last1 or last2, pick larger 
+	// among elements first1 and first2 and place them in the correct position
 	while ((first1 <= last1) && (first2 <= last2)) {
 		if (data[first1] <= data[first2]) {
 			temp[cur] = data[first1];
@@ -30,21 +31,21 @@ void merge(int* data, int first, int mid, int last) {
 		cur++;
 	}
 
-    // Pick up the remaining elements and put in remaining position in sorted array
+    	// Pick up the remaining elements and put in remaining position in sorted array
 	while (first1 <= last1) {
 		temp[cur] = data[first1];
 		first1++;
 		cur++;
 	}
 
-    // Pick up the remaining elements and put in remaining position in sorted array
+    	// Pick up the remaining elements and put in remaining position in sorted array
 	while (first2 <= last2) {
 		temp[cur] = data[first2];
 		first2++;
 		cur++;
 	}
 
-    // Transfer back to the main arrray
+    	// Transfer back to the main arrray
 	for (int i = 0; i < cur; i++)
 		data[i + first] = temp[i];
 
@@ -54,12 +55,12 @@ void mergeSort(int* data, int first, int last) {
 	if (first >= last)
 		return;
 
-    // Mid is the point where the array is divided into two subarrays
+    	// Mid is the point where the array is divided into two subarrays
 	int mid = (first + last) / 2;
 	mergeSort(data, first, mid);
 	mergeSort(data, mid + 1, last);
 
-    // Merge the sorted subarrays
+    	// Merge the sorted subarrays
 	merge(data, first, mid, last);
 }
 
