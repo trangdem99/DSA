@@ -205,12 +205,12 @@ void deleteFix(Node*& root, Node* main) {
 				main->p_Parent->color = 0;
 				temp->p_Right->color = 0;
 				leftRotate(root, main->p_Parent);
-				main = root; 
+				main = root;
 			}
 		}
 		else {
 			Node* temp = main->p_Parent->p_Left;
-			
+
 			if (temp->color == 1) {
 				temp->color = 0;
 				main->p_Parent->color = 1;
@@ -245,13 +245,17 @@ void deleteNode(Node*& root, int key) {
 	Node* z = nullptr; // The seleceted node
 	Node* main, * temp;
 	Node* p = root;
-	while (p != nullptr)
-		if (p->key == key)
+	while (p != nullptr) {
+		if (p->key == key) {
 			z = p;
-		else if (p->key <= key)
+			break;
+		}
+
+		if (p->key <= key)
 			p = p->p_Right;
 		else
 			p = p->p_Left;
+	}
 
 	if (z == nullptr) {
 		cout << "Cannot find your key in the tree." << endl;
@@ -260,6 +264,7 @@ void deleteNode(Node*& root, int key) {
 
 	temp = z;
 	int orginal_color = temp->color;
+
 	if (z->p_Left == nullptr) {
 		main = z->p_Right;
 		rbTransplant(root, z, z->p_Right);
@@ -284,8 +289,10 @@ void deleteNode(Node*& root, int key) {
 		temp->p_Left->p_Parent = temp;
 		temp->color = z->color;
 	}
+
 	delete z;
-	if (orginal_color == 0) {
+
+	if (orginal_color == 0 && root != nullptr) {
 		deleteFix(root, main);
 	}
 	cout << "Delete success" << endl;
@@ -300,7 +307,7 @@ void printTree(Node*& root) {
 }
 
 int main() {
-	Node* root = new Node{};
+	Node* root = nullptr;
 	while (true) {
 		int Mode;
 
@@ -311,17 +318,20 @@ int main() {
 		cout << "3. Search a node" << endl;
 		cout << "4. Show the tree" << endl;
 		cout << "0. Exit program " << endl;
-		cout << "Choose your mode: "; 
+		cout << "Choose your mode: ";
 		cin >> Mode;
 		system("cls");
 
 		if (Mode == 0)
 			break;
 		else if (Mode == 4)
-			printTree(root);
+			if (root != nullptr)
+				printTree(root);
+			else
+				cout << "Tree is empty" << endl;
 		else {
 			int key;
-			cout << "Enter your key you want: "; 
+			cout << "Enter your key you want: ";
 			cin >> key;
 			system("cls");
 
