@@ -1,23 +1,17 @@
 // Red Black Tree in C++ code with love and passion by H.T.Nguyên
 #include <iostream>
-#include <string>
 
 using namespace std;
 
-struct Data {
-	string word;
-	string meaning;
-};
-
 struct Node {
-	Data key;
+	int key;
 	int color;
 	Node* p_Parent;
 	Node* p_Left;
 	Node* p_Right;
 };
 
-Node* createNode(Data key) {
+Node* createNode(int key) {
 	Node* temp = new Node;
 	temp->key = key;
 	temp->color = 1;
@@ -27,150 +21,151 @@ Node* createNode(Data key) {
 	return temp;
 }
 
-Node* searchNode(Node* root, string word) {
+Node* searchNode(Node* root, int key) {
 	if (root == nullptr)
 		return nullptr;
-	if (root->key.word == word)
+	if (root->key == key)
 		return root;
-	if (root->key.word > word)
-		return searchNode(root->p_Left, word);
+	if (root->key > key)
+		return searchNode(root->p_Left, key);
 	else
-		return searchNode(root->p_Right, word);
+		return searchNode(root->p_Right, key);
 }
 
 Node* minimumNode(Node* root) {
 	return (root->p_Left == nullptr) ? root : minimumNode(root->p_Left);
 }
 
-void leftRotate(Node*& root, Node* x) {
-	Node* y = x->p_Right;
-	x->p_Right = y->p_Left;
+void leftRotate(Node*& root, Node* main) {
+	Node* temp = main->p_Right;
+	main->p_Right = temp->p_Left;
 
-	if (y->p_Left != nullptr)
-		y->p_Left->p_Parent = x;
+	if (temp->p_Left != nullptr)
+		temp->p_Left->p_Parent = main;
 
-	y->p_Parent = x->p_Parent;
+	temp->p_Parent = main->p_Parent;
 
-	if (x->p_Parent == nullptr)
-		root = y;
-	else if (x == x->p_Parent->p_Left)
-		x->p_Parent->p_Left = y;
+	if (main->p_Parent == nullptr)
+		root = temp;
+	else if (main == main->p_Parent->p_Left)
+		main->p_Parent->p_Left = temp;
 	else
-		x->p_Parent->p_Right = y;
+		main->p_Parent->p_Right = temp;
 
-	y->p_Left = x;
-	x->p_Parent = y;
+	temp->p_Left = main;
+	main->p_Parent = temp;
 }
 
-void rightRotate(Node*& root, Node* x) {
-	Node* y = x->p_Left;
-	x->p_Left = y->p_Right;
+void rightRotate(Node*& root, Node* main) {
+	Node* temp = main->p_Left;
+	main->p_Left = temp->p_Right;
 
-	if (y->p_Right != nullptr)
-		y->p_Right->p_Parent = x;
+	if (temp->p_Right != nullptr)
+		temp->p_Right->p_Parent = main;
 
-	y->p_Parent = x->p_Parent;
+	temp->p_Parent = main->p_Parent;
 
-	if (x->p_Parent == nullptr)
-		root = y;
-	else if (x == x->p_Parent->p_Right)
-		x->p_Parent->p_Right = y;
+	if (main->p_Parent == nullptr)
+		root = temp;
+	else if (main == main->p_Parent->p_Right)
+		main->p_Parent->p_Right = temp;
 	else
-		x->p_Parent->p_Left = y;
+		main->p_Parent->p_Left = temp;
 
-	y->p_Right = x;
-	x->p_Parent = y;
+	temp->p_Right = main;
+	main->p_Parent = temp;
 }
 
-void insertFix(Node*& root, Node* p) {
-	Node* q;
-	while (p->p_Parent->color == 1) {
-		if (p->p_Parent == p->p_Parent->p_Parent->p_Right) {
-			q = p->p_Parent->p_Parent->p_Left;
+void insertFix(Node*& root, Node* main) {
+	while (main->p_Parent->color == 1) {
+		if (main->p_Parent == main->p_Parent->p_Parent->p_Right) {
+			Node* temp = main->p_Parent->p_Parent->p_Left;
 
-			if (q == nullptr)
+			if (temp == nullptr)
 				return;
 
-			if (q->color == 1) {
-				q->color = 0;
-				p->p_Parent->color = 0;
-				p->p_Parent->p_Parent->color = 1;
-				p = p->p_Parent->p_Parent;
+			if (temp->color == 1) {
+				temp->color = 0;
+				main->p_Parent->color = 0;
+				main->p_Parent->p_Parent->color = 1;
+				main = main->p_Parent->p_Parent;
 			}
 			else {
-				if (p == p->p_Parent->p_Left) {
-					p = p->p_Parent;
-					rightRotate(root, p);
+				if (main == main->p_Parent->p_Left) {
+					main = main->p_Parent;
+					rightRotate(root, main);
 				}
 
-				p->p_Parent->color = 0;
-				p->p_Parent->p_Parent->color = 1;
-				leftRotate(root, p->p_Parent->p_Parent);
+				main->p_Parent->color = 0;
+				main->p_Parent->p_Parent->color = 1;
+				leftRotate(root, main->p_Parent->p_Parent);
 			}
 		}
 		else {
-			q = p->p_Parent->p_Parent->p_Right;
+			Node* temp = main->p_Parent->p_Parent->p_Right;
 
-			if (q == nullptr)
+			if (temp == nullptr)
 				return;
 
-			if (q->color == 1) {
-				q->color = 0;
-				p->p_Parent->color = 0;
-				p->p_Parent->p_Parent->color = 1;
-				p = p->p_Parent->p_Parent;
+			if (temp->color == 1) {
+				temp->color = 0;
+				main->p_Parent->color = 0;
+				main->p_Parent->p_Parent->color = 1;
+				main = main->p_Parent->p_Parent;
 			}
 			else {
-				if (p == p->p_Parent->p_Right) {
-					p = p->p_Parent;
-					leftRotate(root, p);
+				if (main == main->p_Parent->p_Right) {
+					main = main->p_Parent;
+					leftRotate(root, main);
 				}
 
-				p->p_Parent->color = 0;
-				p->p_Parent->p_Parent->color = 1;
-				rightRotate(root, p->p_Parent->p_Parent);
+				main->p_Parent->color = 0;
+				main->p_Parent->p_Parent->color = 1;
+				rightRotate(root, main->p_Parent->p_Parent);
 			}
 		}
-		if (p == root)
+		if (main == root)
 			break;
 	}
 	root->color = 0;
 }
 
-void insertNode(Node*& root, Data key) {
-	Node* temp = createNode(key);
+void insertNode(Node*& root, int key) {
+	Node* newNode = createNode(key);
 	Node* y = nullptr;
 	Node* x = root;
 
 	// Find the suitable position to insert the new Node
 	while (x != nullptr) {
 		y = x;
-		if (temp->key.word < x->key.word)
+		if (newNode->key < x->key)
 			x = x->p_Left;
 		else
 			x = x->p_Right;
 	}
 
-	temp->p_Parent = y; // Mark parent of new node to the chosen node
+	newNode->p_Parent = y; // Mark parent of new node to the chosen node
 
 	// Put the new node to the correct poistion
 	if (y == nullptr)
-		root = temp;
-	else if (temp->key.word < y->key.word)
-		y->p_Left = temp;
+		root = newNode;
+	else if (newNode->key < y->key)
+		y->p_Left = newNode;
 	else
-		y->p_Right = temp;
+		y->p_Right = newNode;
 
-
-	if (temp->p_Parent == nullptr) {
-		temp->color = 0;
+	// Check if the new node is root node or not
+	if (newNode->p_Parent == nullptr) {
+		newNode->color = 0;
 		return;
 	}
 
-	if (temp->p_Parent->p_Parent == nullptr)
+	// Check if the new node is child of root node or not
+	if (newNode->p_Parent->p_Parent == nullptr)
 		return;
 
-	insertFix(root, temp);
+	insertFix(root, newNode);
+	cout << "Insert success" << endl;
 }
 
 void rbTransplant(Node*& root, Node* p, Node* q) {
@@ -182,114 +177,169 @@ void rbTransplant(Node*& root, Node* p, Node* q) {
 		p->p_Parent = q->p_Parent;
 }
 
-void deleteFix(Node*& root, Node* p) {
-	Node* q;
-	while (p != root && p->color == 0) {
-		if (p == p->p_Parent->p_Left) {
-			q = p->p_Parent->p_Right;
-			if (q->color == 1) {
-				q->color = 0;
-				p->p_Parent->color = 1;
-				leftRotate(root, p->p_Parent);
-				q = p->p_Parent->p_Right;
+void deleteFix(Node*& root, Node* main) {
+	while (main != root && main->color == 0) {
+		if (main == main->p_Parent->p_Left) {
+			Node* temp = main->p_Parent->p_Right;
+
+			if (temp->color == 1) {
+				temp->color = 0;
+				main->p_Parent->color = 1;
+				leftRotate(root, main->p_Parent);
+				temp = main->p_Parent->p_Right;
 			}
 
-			if (q->p_Left->color == 0 && q->p_Right->color == 0) {
-				q->color = 1;
-				p = p->p_Parent;
+			if (temp->p_Left->color == 0 && temp->p_Right->color == 0) {
+				temp->color = 1;
+				main = main->p_Parent;
 			}
 			else {
-				if (q->p_Right->color == 0) {
-					q->p_Left->color = 0;
-					q->color = 1;
-					rightRotate(root, q);
-					q = p->p_Parent->p_Right;
+				if (temp->p_Right->color == 0) {
+					temp->p_Left->color = 0;
+					temp->color = 1;
+					rightRotate(root, temp);
+					temp = main->p_Parent->p_Right;
 				}
 
-				q->color = p->p_Parent->color;
-				p->p_Parent->color = 0;
-				q->p_Right->color = 0;
-				leftRotate(root, p->p_Parent);
-				p = root;
+				temp->color = main->p_Parent->color;
+				main->p_Parent->color = 0;
+				temp->p_Right->color = 0;
+				leftRotate(root, main->p_Parent);
+				main = root; 
 			}
 		}
 		else {
-			q = p->p_Parent->p_Left;
-			if (q->color == 1) {
-				q->color = 0;
-				p->p_Parent->color = 1;
-				rightRotate(root, p->p_Parent);
-				q = p->p_Parent->p_Left;
+			Node* temp = main->p_Parent->p_Left;
+			
+			if (temp->color == 1) {
+				temp->color = 0;
+				main->p_Parent->color = 1;
+				rightRotate(root, main->p_Parent);
+				temp = main->p_Parent->p_Left;
 			}
 
-			if (q->p_Right->color == 0 && q->p_Left->color == 0) {
-				q->color = 1;
-				p = p->p_Parent;
+			if (temp->p_Right->color == 0 && temp->p_Left->color == 0) {
+				temp->color = 1;
+				main = main->p_Parent;
 			}
 			else {
-				if (q->p_Left->color == 0) {
-					q->p_Right->color = 0;
-					q->color = 1;
-					leftRotate(root, q);
-					q = p->p_Parent->p_Left;
+				if (temp->p_Left->color == 0) {
+					temp->p_Right->color = 0;
+					temp->color = 1;
+					leftRotate(root, temp);
+					temp = main->p_Parent->p_Left;
 				}
 
-				q->color = p->p_Parent->color;
-				p->p_Parent->color = 0;
-				q->p_Left->color = 0;
-				rightRotate(root, p->p_Parent);
-				p = root;
+				temp->color = main->p_Parent->color;
+				main->p_Parent->color = 0;
+				temp->p_Left->color = 0;
+				rightRotate(root, main->p_Parent);
+				main = root;
 			}
 		}
 	}
-	p->color = 0;
+	main->color = 0;
 }
 
-bool deleteNode(Node*& root, string word) {
-	Node* z = nullptr;
-	Node* x, * y;
+void deleteNode(Node*& root, int key) {
+	Node* z = nullptr; // The seleceted node
+	Node* main, * temp;
 	Node* p = root;
 	while (p != nullptr)
-		if (p->key.word == word)
+		if (p->key == key)
 			z = p;
-		else if (p->key.word <= word)
+		else if (p->key <= key)
 			p = p->p_Right;
 		else
 			p = p->p_Left;
 
-	if (z == nullptr)
-		return false;
+	if (z == nullptr) {
+		cout << "Cannot find your key in the tree." << endl;
+		return;
+	}
 
-	y = z;
-	int orginal_color = y->color;
+	temp = z;
+	int orginal_color = temp->color;
 	if (z->p_Left == nullptr) {
-		x = z->p_Right;
+		main = z->p_Right;
 		rbTransplant(root, z, z->p_Right);
 	}
 	else if (z->p_Right == nullptr) {
-		x = z->p_Left;
+		main = z->p_Left;
 		rbTransplant(root, z, z->p_Left);
 	}
 	else {
-		y = minimumNode(z->p_Right);
-		orginal_color = y->color;
-		x = y->p_Right;
-		if (y->p_Parent == z)
-			x->p_Parent = y;
+		temp = minimumNode(z->p_Right);
+		orginal_color = temp->color;
+		main = temp->p_Right;
+		if (temp->p_Parent == z)
+			main->p_Parent = temp;
 		else {
-			rbTransplant(root, y, y->p_Right);
-			y->p_Right = z->p_Right;
-			y->p_Right->p_Parent = y;
+			rbTransplant(root, temp, temp->p_Right);
+			temp->p_Right = z->p_Right;
+			temp->p_Right->p_Parent = temp;
 		}
-		rbTransplant(root, z, y);
-		y->p_Left = z->p_Left;
-		y->p_Left->p_Parent = y;
-		y->color = z->color;
+		rbTransplant(root, z, temp);
+		temp->p_Left = z->p_Left;
+		temp->p_Left->p_Parent = temp;
+		temp->color = z->color;
 	}
 	delete z;
 	if (orginal_color == 0) {
-		deleteFix(root, x);
+		deleteFix(root, main);
+	}
+	cout << "Delete success" << endl;
+}
+
+void printTree(Node*& root) {
+	if (root != nullptr) {
+		printTree(root->p_Left);
+		cout << root->key << " - " << root->color << endl;
+		printTree(root->p_Right);
 	}
 }
 
-// How it work: create node root -> insertNode / deleteNode
+int main() {
+	Node* root = new Node{};
+	while (true) {
+		int Mode;
+
+		system("cls");
+		cout << "Welcome to Red Black Tree Implementation !!!" << endl;
+		cout << "1. Insert a node" << endl;
+		cout << "2. Delete a node" << endl;
+		cout << "3. Search a node" << endl;
+		cout << "4. Show the tree" << endl;
+		cout << "0. Exit program " << endl;
+		cout << "Choose your mode: "; 
+		cin >> Mode;
+		system("cls");
+
+		if (Mode == 0)
+			break;
+		else if (Mode == 4)
+			printTree(root);
+		else {
+			int key;
+			cout << "Enter your key you want: "; 
+			cin >> key;
+			system("cls");
+
+			if (Mode == 1)
+				insertNode(root, key);
+			else if (Mode == 2)
+				deleteNode(root, key);
+			else
+				if (searchNode(root, key) != nullptr)
+					cout << "Found your key in the tree" << endl;
+				else
+					cout << "Cannot find your key in the tree" << endl;
+		}
+
+		system("pause");
+		system("cls");
+	}
+
+	cout << "Exiting..." << endl;
+	return 0;
+}
