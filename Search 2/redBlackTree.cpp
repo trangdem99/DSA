@@ -1,4 +1,4 @@
-// Red Black Tree in C++ code with love and passion by H.T.Nguyên
+// Red Black Tree in C++ code with love and passion by H.T.NguyÃªn
 #include <iostream>
 #include <string>
 
@@ -218,7 +218,7 @@ void deleteFix(Node*& root, Node* p) {
 			if (q->color == 1) {
 				q->color = 0;
 				p->p_Parent->color = 1;
-				leftRotate(root, p->p_Parent);
+				rightRotate(root, p->p_Parent);
 				q = p->p_Parent->p_Left;
 			}
 
