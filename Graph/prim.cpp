@@ -1,47 +1,91 @@
-// Prim's algorithm in C++ code with love and passion by H.T.Nguyên
+// Prim's algorithm in C++ code with love and passion by H.T.NguyÃªn
 #include <iostream>
 
 #define INFINITY 999999
 
 using namespace std;
 
-void prim(int** graph, int n) {
-	// set number of edge to 0
-	int no_edge = 0;
+void addEdge(int** graph, int pos1, int pos2, int weight) {
+	graph[pos1][pos2] = weight;
+	graph[pos2][pos1] = weight;
+}
 
+void removeEdge(int** graph, int pos1, int pos2, int weight) {
+	graph[pos1][pos2] = weight;
+	graph[pos2][pos1] = weight;
+}
+
+int** createAdjMatrix(int numVertices) {
+	int** graph = new int* [numVertices];
+
+	for (int i = 0; i < numVertices; i++)
+		graph[i] = new int[numVertices] {0};
+
+	return graph;
+}
+
+void prim(int** graph, int numVertices) {
 	// create a array to track selected vertex
-	// selected will become true otherwise false
-	int* selected = new int[n];
+	bool* selected = new bool[numVertices] {false};
 
-	// the number of egde in minimum spanning tree will be
-	// always less than (n -1), where n is number of vertices in graph
+	// store the result
+	int* result = new int[numVertices] {0};
 
-	// choose 0th vertex and make it true
-	selected[0] = true;
+	// pick minimum weight edge
+	int* key = new int[numVertices];
 
-	while (no_edge < n - 1) {
-		int x = 0;  //  row number
-		int y = 0;  //  col number
+	for (int i = 0; i < numVertices; i++)
+		key[i] = INFINITY;
+
+	key[0] = 0;
+	result[0] = -1;
+
+	for (int i = 0; i < numVertices - 1; i++) {
 		int min = INFINITY;
+		int min_index;
 
-		for (int i = 0; i < n; i++) {
-			if (selected[i]) {
-				for (int j = 0; j < n; j++) {
-					if (!selected[j] && graph[i][j]) {  // not in selected and there is an edge
-						if (min > graph[i][j]) {
-							min = graph[i][j];
-							x = i;
-							y = j;
-						}
-					}
-				}
+		for (int j = 0; j < numVertices; j++)
+			if (key[j] < min && selected[j] == false) {
+				min = key[j];
+				min_index = j;
 			}
-		}
+		selected[min_index] = true;
 
-		cout << x << " - " << y << " : " << graph[x][y] << endl;
-		selected[y] = true;
-		no_edge++;
+		for (int j = 0; j < numVertices; j++)
+			if (graph[min_index][j] && graph[min_index][j] < key[j] && selected[j] == false) {
+				result[j] = min_index;
+				key[j] = graph[min_index][j];
+			}
+	}
+
+	for (int i = 1; i < numVertices; i++)
+		cout << result[i] << "-" << i << "   " << graph[i][result[i]] << endl;
+}
+
+void printGraph(int** graph, int numVertices) {
+	for (int i = 0; i < numVertices; i++) {
+		for (int j = 0; j < numVertices; j++)
+			cout << graph[i][j] << " ";
+		cout << endl;
 	}
 }
 
-// How it work: create dynamic array tier 2 (graph) -> prim
+int main() {
+	int numVertices; cout << "Enter the number of vertices: "; cin >> numVertices;
+	int numEdges; cout << "Enter the number of edges: "; cin >> numEdges;
+	int** graph = createAdjMatrix(numVertices);
+
+	for (int i = 0; i < numVertices; i++) {
+		int pos1, pos2, weight;
+		cout << "Enter first vertex of edge " << i + 1 << " : "; cin >> pos1;
+		cout << "Enter second vertex of edge " << i + 1 << " : "; cin >> pos2;
+		cout << "Enter weight of edge " << i + 1 << " : "; cin >> weight;
+		addEdge(graph, pos1 - 1, pos2 - 1, weight);
+	}
+
+	printGraph(graph, numVertices);
+
+	prim(graph, numVertices);
+	
+	return 0;
+}
