@@ -20,6 +20,7 @@ void interchangeSort(int* data, int n)
 }
 
 int main() {
+    cout << "Welcome to Interchange Sort Implementation !!!" << endl;
     int size;
     cout << "Input size: "; cin >> size;
 

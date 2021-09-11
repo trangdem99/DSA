@@ -60,6 +60,7 @@ void cycleSort(int* data, int n)
 }
 
 int main() {
+	cout << "Welcome to Cycle Sort Implementation !!!" << endl;
 	int size;
 	cout << "Input size: "; cin >> size;
 

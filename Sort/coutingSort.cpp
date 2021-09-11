@@ -1,4 +1,4 @@
-// Couting sort in C++ code with love and passion by H.T.NguyÃªn
+// Couting sort in C++ code with love and passion by H.T.Nguyên
 #include <iostream>
 #include <string>
 
@@ -47,6 +47,7 @@ void printData(int* data, int size) {
 }
 
 int main() {
+    cout << "Welcome to Couting Sort Implementation !!!" << endl;
     int size;
     cout << "Input size: "; cin >> size;
 

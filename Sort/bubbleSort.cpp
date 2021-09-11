@@ -61,6 +61,7 @@ void printData(int* data, int size) {
 }
 
 int main() {
+    cout << "Welcome to Bubble Sort Implementation !!!" << endl;
     int size;
     cout << "Input size: "; cin >> size;
 

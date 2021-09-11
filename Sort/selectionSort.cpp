@@ -30,6 +30,7 @@ void selectionSort(int* data, int size) {
 }
 
 int main() {
+    cout << "Welcome to Selection Sort Implementation !!!" << endl;
     int size;
     cout << "Input size: "; cin >> size;
 

@@ -27,6 +27,7 @@ void shellSort(int* data, int n) {
 }
 
 int main() {
+    cout << "Welcome to Shell Sort Implementation !!!" << endl;
     int size;
     cout << "Input size: "; cin >> size;
 

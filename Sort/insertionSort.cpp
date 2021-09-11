@@ -27,6 +27,7 @@ void insertionSort(int* data, int size) {
 }
 
 int main() {
+    cout << "Welcome to Insertion Sort Implementation !!!" << endl;
     int size;
     cout << "Input size: "; cin >> size;
 

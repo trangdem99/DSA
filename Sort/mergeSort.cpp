@@ -64,6 +64,7 @@ void mergeSort(int* data, int first, int last) {
 }
 
 int main() {
+	cout << "Welcome to Merge Sort Implementation !!!" << endl;
 	int size;
 	cout << "Input size: "; cin >> size;
 

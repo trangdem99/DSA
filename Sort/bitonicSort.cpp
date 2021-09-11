@@ -48,6 +48,7 @@ void bitonicSort(int* data, int low, int cnt, int dir) {
 }
 
 int main() {
+	cout << "Welcome to Bitonic Sort Implementation !!!" << endl;
 	int size;
 	cout << "Input size: "; cin >> size;
 

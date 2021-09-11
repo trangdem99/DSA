@@ -21,4 +21,23 @@ int binarySearch(int* data, int key, int left, int right) {
 	return -1;
 }
 
-// How it work: create dynamic array -> binarySearch (left = 0, right = n - 1)
+int main() {
+	cout << "Welcome to Binary Search Implementation !!!" << endl;
+	int size, key;
+	cout << "Input size: "; cin >> size;
+	int* data = new int[size];
+
+
+	for (int i = 0; i < size; i++) {
+		cout << "Input element number " << i + 1 << " : ";
+		cin >> data[i];
+	}
+
+	cout << "Enter the number you want to find: "; cin >> key;
+	if (binarySearch(data, key, 0, size - 1) != -1)
+		cout << "Found your key in the array" << endl;
+	else
+		cout << "Cannot find your key in the array" << endl;
+
+	return 0;
+}

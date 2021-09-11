@@ -54,6 +54,7 @@ void radixSort(int* data, int size) {
 }
 
 int main() {
+    cout << "Welcome to Radix Sort Implementation !!!" << endl;
     int size;
     cout << "Input size: "; cin >> size;
 

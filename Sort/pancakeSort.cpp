@@ -47,6 +47,7 @@ void printData(int* data, int n) {
 }
 
 int main() {
+    cout << "Welcome to Pancake Sort Implementation !!!" << endl;
     int size;
     cout << "Input size: "; cin >> size;
 

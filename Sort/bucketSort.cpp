@@ -108,6 +108,7 @@ void BucketSort(int* data, int size) {
 }
 
 int main() {
+    cout << "Welcome to Bucket Sort Implementation !!!" << endl;
     int size;
     cout << "Input size: "; cin >> size;
 

@@ -60,6 +60,7 @@ void quickSort(int * data, int low, int high) {
 }
 
 int main() {
+	cout << "Welcome to Quick Sort Implementation !!!" << endl;
 	int size;
 	cout << "Input size: "; cin >> size;
 

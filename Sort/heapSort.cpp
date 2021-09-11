@@ -52,6 +52,7 @@ void heapSort(int* data, int n) {
 }
 
 int main() {
+    cout << "Welcome to Heap Sort Implementation !!!" << endl;
     int size;
     cout << "Input size: "; cin >> size;
 
