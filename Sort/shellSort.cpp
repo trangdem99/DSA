@@ -18,9 +18,11 @@ void shellSort(int* data, int n) {
         for (int i = interval; i < n; i += 1) {
             int temp = data[i];
             int j;
+            
             for (j = i; j >= interval && data[j - interval] > temp; j -= interval) {
-            data[j] = data[j - interval];
+                data[j] = data[j - interval];
             }
+            
             data[j] = temp;
         }
     }
