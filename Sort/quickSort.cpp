@@ -1,6 +1,6 @@
 // Quick sort in C++ code with love and passion by H.T.Nguyên
-
 #include <iostream>
+
 using namespace std;
 
 // print data
@@ -29,8 +29,7 @@ int partition(int* data, int low, int high) {
 	for (int j = low; j < high; j++)
 		if (data[j] < pivot) {
 
-			// if element smaller than pivot is found then 
-			// swap it with the greater element pointed by i
+			// if element smaller than pivot is found then swap it with the greater element pointed by i
 			i++;
 
 			// swap element at i with element at j
@@ -60,4 +59,22 @@ void quickSort(int * data, int low, int high) {
 	}
 }
 
-// How it work: create dynamic array -> quickSort (low = 0, high = n - 1)
+int main() {
+	int size;
+	cout << "Input size: "; cin >> size;
+
+	int* data = new int[size];
+
+	for (int i = 0; i < size; i++) {
+		cout << "Input element number " << i + 1 << " : ";
+		cin >> data[i];
+	}
+
+	quickSort(data, 0, size - 1);
+
+	cout << "Sorted Array in Ascending Order:" << endl;
+
+	printData(data, size);
+
+	return 0;
+}

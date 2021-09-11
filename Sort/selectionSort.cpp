@@ -1,10 +1,10 @@
 // Selection sort in C++ code with love and passion by H.T.Nguyên
-
 #include <iostream>
+
 using namespace std;
 
 // function to print an array
-void printArray(int* data, int size) {
+void printData(int* data, int size) {
     for (int i = 0; i < size; i++) {
         cout << data[i] << " ";
     }
@@ -29,4 +29,22 @@ void selectionSort(int* data, int size) {
     }
 }
 
-// How it work: create dynamic array -> selectionSort
+int main() {
+    int size;
+    cout << "Input size: "; cin >> size;
+
+    int* data = new int[size];
+
+    for (int i = 0; i < size; i++) {
+        cout << "Input element number " << i + 1 << " : ";
+        cin >> data[i];
+    }
+
+    selectionSort(data, size);
+
+    cout << "Sorted Array in Ascending Order:" << endl;
+
+    printData(data, size);
+
+    return 0;
+}

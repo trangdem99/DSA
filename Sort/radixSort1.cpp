@@ -1,6 +1,6 @@
 // Radix sort for number in C++ code with love and passion by H.T.Nguyên
-
 #include <iostream>
+
 using namespace std;
 
 // print data
@@ -10,7 +10,6 @@ void printData(int* data, int size) {
     }
     cout << endl;
 }
-
 
 // Function to get the largest element from an array
 int getMax(int* data, int n) {
@@ -24,7 +23,7 @@ int getMax(int* data, int n) {
 // Using counting sort to sort the elements in the basis of significant places
 void countingSort(int* data, int size, int place) {
     int* output = new int[size];
-    int count[10] = {0};
+    int count[10] = { 0 };
 
     // Calculate count of elements
     for (int i = 0; i < size; i++)
@@ -44,8 +43,7 @@ void countingSort(int* data, int size, int place) {
         data[i] = output[i];
 }
 
-// Main function to implement radix sort
-void radixsort(int* data, int size) {
+void radixSort(int* data, int size) {
     // Get maximum element
     int max = getMax(data, size);
 
@@ -54,4 +52,22 @@ void radixsort(int* data, int size) {
         countingSort(data, size, place);
 }
 
-// How it work: create dynamic array -> radixsort
+int main() {
+    int size;
+    cout << "Input size: "; cin >> size;
+
+    int* data = new int[size];
+
+    for (int i = 0; i < size; i++) {
+        cout << "Input element number " << i + 1 << " : ";
+        cin >> data[i];
+    }
+
+    radixSort(data, size);
+
+    cout << "Sorted Array in Ascending Order:" << endl;
+
+    printData(data, size);
+
+    return 0;
+}

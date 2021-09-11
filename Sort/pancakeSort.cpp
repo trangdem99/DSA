@@ -1,9 +1,9 @@
+// Pancake sort in C++ code with love and passion by H.T.Nguyên
 #include <iostream>
 
 using namespace std;
 
-void flip(int* data, int size)
-{
+void flip(int* data, int size) {
     for (int i = 0; i < size; i++, size--) {
         int temp = data[i];
         data[i] = data[size];
@@ -12,8 +12,7 @@ void flip(int* data, int size)
 }
 
 // Returns index of the maximum element in arr[0..n-1]  
-int findMax(int* data, int size)
-{
+int findMax(int* data, int size) {
     int max_i = 0;
     for (int i = 0; i < size; ++i)
         if (data[i] > data[max_i])
@@ -22,8 +21,7 @@ int findMax(int* data, int size)
 }
 
 // The main function that sorts given array using flip operations 
-void pancakeSort(int* data, int size)
-{
+void pancakeSort(int* data, int size) {
     for (int curr_size = size; curr_size > 1; --curr_size)
     {
         // Find index of the maximum element in arr[0..curr_size-1] 
@@ -42,8 +40,7 @@ void pancakeSort(int* data, int size)
 }
 
 // A utility function to print n array of size n  
-void printData(int* data, int n)
-{
+void printData(int* data, int n) {
     for (int i = 0; i < n; ++i)
         cout << data[i] << " ";
     cout << endl;

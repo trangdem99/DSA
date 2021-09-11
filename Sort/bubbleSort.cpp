@@ -1,9 +1,8 @@
 // Bubble sort in C++ code with love and passion by H.T.Nguyên
-
 #include <iostream>
+
 using namespace std;
 
-// perform bubble sort
 void bubbleSort(int *data, int size) {
 
     // loop to access each array element
@@ -20,11 +19,10 @@ void bubbleSort(int *data, int size) {
                 data[j] = data[j + 1];
                 data[j + 1] = temp;
             }
+        }
     }
-  }
 }
 
-// perform bubble sort
 void optimizedBubbleSort(int *data, int size) {
 
     // loop to access each array element
@@ -62,4 +60,26 @@ void printData(int* data, int size) {
     cout << endl;
 }
 
-// How it work: create dynamic array -> bubbleSort / optimizedBubbleSort
+int main() {
+    int size;
+    cout << "Input size: "; cin >> size;
+
+    int* data = new int[size];
+
+    for (int i = 0; i < size; i++) {
+        cout << "Input element number " << i + 1 << " : ";
+        cin >> data[i];
+    }
+
+    // Normal bubble sort
+    //bubbleSort(data, size);
+
+    // Optimized bubble sort
+    //optimizedBubbleSort(data, size);
+
+    cout << "Sorted Array in Ascending Order:" << endl;
+
+    printData(data, size);
+
+    return 0;
+}

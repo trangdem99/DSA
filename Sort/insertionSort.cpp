@@ -1,6 +1,6 @@
 // Insertion sort in C++ code with love and passion by H.T.Nguyên
-
 #include <iostream>
+
 using namespace std;
 
 // print data
@@ -26,4 +26,22 @@ void insertionSort(int* data, int size) {
     }
 }
 
-// How it work: create dynamic array -> insertionSort
+int main() {
+    int size;
+    cout << "Input size: "; cin >> size;
+
+    int* data = new int[size];
+
+    for (int i = 0; i < size; i++) {
+        cout << "Input element number " << i + 1 << " : ";
+        cin >> data[i];
+    }
+
+    insertionSort(data, size);
+
+    cout << "Sorted Array in Ascending Order:" << endl;
+
+    printData(data, size);
+
+    return 0;
+}
