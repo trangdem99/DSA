@@ -1,4 +1,4 @@
-// Couting sort in C++ code with love and passion by H.T.Nguyên
+// Couting sort in C++ code with love and passion by H.T.NguyÃªn
 #include <iostream>
 #include <string>
 
@@ -26,7 +26,6 @@ void countingSort(int* data, int size) {
     for (i = 0; i < size; i++)
         count_array[data[i] - min]++;
 
-
     for (i = 1; i < k; i++)
         count_array[i] += count_array[i - 1];
 
@@ -37,7 +36,6 @@ void countingSort(int* data, int size) {
 
     for (i = 0; i < size; i++)
         data[i] = output[i];
-
 }
 
 // print data
